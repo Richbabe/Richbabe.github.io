@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      EatWhat：微信小程序开发（1）
+title:      EatWhat：微信小程序开发一
 subtitle:   一个可以扫码点餐的小程序
 date:       2018-04-15
 author:     Richbabe
@@ -14,13 +14,13 @@ tags:
 
 ## 开发前的准备
 首先请先阅读微信小程序官方的教程：
-> https://developers.weixin.qq.com/miniprogram/dev/index.html?t=2018323
+> [小程序官方教程](https://developers.weixin.qq.com/miniprogram/dev/index.html?t=2018323)
 
 通过此教程，你可以申请一个属于你团队的小程序开发账号，通过该账号你可以管理、开发你的小程序，接着便需要安装开发者工具，链接如下：
-> https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html?t=2018412
+> [微信小程序开发者工具下载连接](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html?t=2018412)
 
 有关开发者工具的更多详细介绍可参考：
-> https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html?t=2018412
+> [开发者工具详细介绍](https://developers.weixin.qq.com/miniprogram/dev/devtools/devtools.html?t=2018412)
 
 在完成开发者工具的安装后，我们便可以开始我们的小程序开发了！
 
@@ -41,11 +41,11 @@ tags:
 
 接下来我们分别看看这4种文件的作用。
 
-（1）JSON配置
+#### JSON配置
 
 我们可以看到在项目的根目录有一个app.json和project.config.json,此外在pages/logs目录下还有一个logs.json，我们一次来说明一下他们的用途
 
-* 小程序配置 app.json
+##### 小程序配置 app.json
 > app.json是对当前小程序的全局配置，包括了小程序的所有页面路径、界面表现、网络超时时间、底部tab等，新建项目里边的app.json配置内容如下：
 
 ```
@@ -109,17 +109,17 @@ tags:
 ![image](https://github.com/Richbabe/Richbabe.github.io/blob/master/img/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%88%AA%E5%9B%BE/appJson%E6%BC%94%E7%A4%BA1.jpg?raw=true)
 ![image](https://github.com/Richbabe/Richbabe.github.io/blob/master/img/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%BC%80%E5%8F%91%E6%88%AA%E5%9B%BE/appJson%E6%BC%94%E7%A4%BA2.jpg?raw=true)
 
-* 工具配置 project.config.json
+##### 工具配置 project.config.json
 > 通常大家在使用一个工具的时候，都会针对各自喜好做一些个性化配置，例如界面颜色、编译配置等等，当你换了另外一台电脑重新安装工具的时候，你还要重新配置。
 考虑到这点，小程序开发者工具在每个项目的根目录都会生成一个project.config.json，你在工具上做的任何配置都会写入到这个文件，当你重新安装工具或者换电脑工作时，你只要载入同一个项目的代码包，开发者工具就自动会帮你恢复到当时你开发项目时的个性化配置，其中会包括编辑器的颜色、代码上传时自动压缩等等一系列选项。
 其他配置项细节可以参考文档
 [开发者工具的配置](https://developers.weixin.qq.com/miniprogram/dev/devtools/edit.html#%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)
 
-* 页面配置 page,json
+##### 页面配置 page,json
 > 这里的 page.json 其实用来表示 pages/logs 目录下的log.json这类和小程序页面 相关的配置。如果你整个小程序的风格是蓝色调，那么你可以在 app.json 里边声明顶部颜色是蓝色即可。实际情况可能不是这样，可能你小程序里边的每个页面都有不一样的色调来区分不同功能模块，因此我们提供了page.json，让开发者可以独立定义每个页面的一些属性，例如刚刚说的顶部颜色、是否允许下拉刷新等等。其他配置项细节可以参考文档 
 [小程序的配置 page.json](https://developers.weixin.qq.com/miniprogram/dev/framework/config.html)
 
-（2）WXML模板
+#### WXML模板
 
 从事过网页编程的人知道，网页编程采用的是 HTML + CSS + JS 这样的组合，其中 HTML 是用来描述当前这个页面的结构，CSS 用来描述页面的样子，JS 通常是用来处理这个页面和用户的交互。
 
@@ -155,7 +155,7 @@ this.setData({ msg: "Hello World" })
 通过 {{ }} 的语法把一个变量绑定到界面上，我们称为数据绑定。仅仅通过数据绑定还不够完整的描述状态和界面的关系，还需要 if/else, for等控制能力，在小程序里边，这些控制能力都用 wx: 开头的属性来表达。 更详细的文档可以参考
 [WXML](https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxml/)
 
-（3）WXSS样式
+#### WXSS样式
 
 WXSS 具有 CSS 大部分的特性，小程序在 WXSS 也做了一些扩充和修改。
 1. 新增了尺寸单位。在写 CSS 样式时，开发者需要考虑到手机设备的屏幕会有不同的宽度和设备像素比，采用一些技巧来换算一些像素单位。WXSS 在底层支持新的尺寸单位 rpx ，开发者可以免去换算的烦恼，只要交给小程序底层来换算即可，由于换算采用的浮点数运算，所以运算结果会和预期结果有一点点偏差。
@@ -165,7 +165,7 @@ WXSS 具有 CSS 大部分的特性，小程序在 WXSS 也做了一些扩充和�
 更详细的文档可以参考
 [WXSS](https://developers.weixin.qq.com/miniprogram/dev/framework/view/wxss.html)
 
-（4）JS交互逻辑
+#### JS交互逻辑
 
 一个服务仅仅只有界面展示是不够的，还需要和用户做交互：响应用户的点击、获取用户的位置等等。在小程序里边，我们就通过编写 JS 脚本文件来处理用户的操作。
 
