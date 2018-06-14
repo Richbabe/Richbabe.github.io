@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      Unity3D Shader学习日记
-subtitle:   （1）
+title:      Unity3D Shader学习日记（1）
+subtitle:   初探Standard Surface Shader
 date:       2018-06-13
 author:     Richbabe
 header-img: img/post-bg-desk.jpg
