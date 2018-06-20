@@ -223,7 +223,7 @@ Phong Shading：
 为什么逐像素计算会得到更好的效果？
 
 因为我们逐像素取的光照的方向是一致的，法线方向也是通过上一步的vertex shader传递过来的，如果像素和顶点对应了的话，那不是每个像素的计算结果都会一样呢？然而，其实像素和顶点是不对应的，这个就是传说中的渲染流水线了，在顶点阶段计算的结果，并不是直接传递给像素着色器的，而是经过了一系列的插值计算，我们从vertex shader传递过来的法线方向，只代表了这一个顶点的顶点法线方向，而到了pixel阶段，这个像素所对应的法线等参数相当于其周围几个顶点进行插值后的结果。我们用这一个像素点对应的法线方向与光照方向进行计算，就可以获得该像素点在光照条件下的颜色值，而不是先计算好颜色再插值得到结果。
-![image](https://img-blog.csdn.net/20161128004841682?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+![image](https://github.com/Richbabe/Richbabe.github.io/blob/master/img/U3d%20Shader/%E9%A1%B6%E7%82%B9%E7%9D%80%E8%89%B2%E5%99%A8%E6%8F%92%E5%80%BC%E5%88%B0%E7%89%87%E6%AE%B5%E7%9D%80%E8%89%B2%E5%99%A8.png?raw=true)
 
 总结一下Gouraud Shading和Phong Shading的区别：
 * Gouraud Shading是在顶点着色器实现冯氏光照模型，而Phong Shadinng是在片段着色器实现冯氏光照模型。相对于片段来说，顶点要少得多，因此Gouraud Shading比Phong Shading的计算量要少很多，但是光照看起来不会非常真实：
@@ -240,7 +240,7 @@ Phong Shading：
 然而，实际上，我们在现实世界中经常会发现，即使我们让一个物体不被光直接照射，我们也可能会看到物体，虽然亮度不是很高，这其实是由于物体之间光的反射造成的，也就是间接光照，间接光照是更高级的渲染，比如光线追踪算法等。但是在实时图形学，我们大部分情况是通过一个环境光（Ambient Light）统一代表了间接光，这样，即使在没有光的时候，我们也可以看见物体。
 
 兰伯特光照出来的时候，貌似还没有这么高科技的技术，所以呢，有人就想到了一个取巧的技术（据说是《半条命》），既保证了兰伯特模型计算出来的光照结果大于0，又整体提升了亮度，使非直接受光面不是单纯的置为黑色。这是一个在图形学领域经常有的变换，区间转化，从（-1,1）转化到（0,1），如果不考虑无意义的负值，也可以说成从（0,1）转化到了（0.5,1）。方法很简单，乘以0.5再加上0.5。这样，原本亮度为1的地方，乘以0.5变成了0.5，加上0.5就又成了1，而原本光照强度为0的地方，就变成了0.5，原本为负数的地方，也能保证为大于0了。半兰伯特光照这种区间转化的原理图如下所示：
-![image](https://img-blog.csdn.net/20161129005113489?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+![image](https://github.com/Richbabe/Richbabe.github.io/blob/master/img/U3d%20Shader/HalfLambert%E5%8C%BA%E9%97%B4%E8%BD%AC%E5%8C%96.png?raw=true)
 
 下面看一下逐像素计算的半兰伯特光照shader，比兰伯特光照的只是将法线向量与光方向向量的点乘结果用一种更好的方式区间转化到了（0,1）区间：
 
@@ -560,7 +560,7 @@ fixed4 color = tex2D(_MainTex, i.uv);
 #define TRANSFORM_TEX(tex,name) (tex.xy * name##_ST.xy + name##_ST.zw) 
 ```
 如果我们使用了这个宏，就需要在shader中定义我们要采样的纹理的一个系数，命名方式为 纹理名_ST，float4类型。那么这个值是什么呢？
-![image](https://img-blog.csdn.net/20161201013308533?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+![image](https://github.com/Richbabe/Richbabe.github.io/blob/master/img/U3d%20Shader/TRANSFORM_TEX%E5%AE%8F.png?raw=true)
 
 就是这个啦！我们在使用纹理时，unity会为我们提供两个参数，一个是Tiling，一个是Offset。简单来说，Tiling表示纹理的缩放比例，Offset表示了纹理使用时采样的偏移值。关于Tiling和Offset的介绍，可以参考[这篇文章](https://blog.csdn.net/puppet_master/article/details/50358612)。
 
