@@ -387,7 +387,7 @@ float3 multipliedColor = color.rgb * coordinate.x;
 		fixed4 _Color;
 ```
 这里用到几个新的变量类型：half和fixed，其实他们和float和double一样都表示浮点数，只不过精度不同。这些精度将决定计算结果的数值范围，精度范围如下表：
-![image](https://img-blog.csdn.net/20170622135811237?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvaHVhaXhpYW9uaXU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+![image](https://github.com/Richbabe/Richbabe.github.io/blob/master/img/U3d%20Shader/HLSL%E4%B8%89%E7%A7%8D%E7%B2%BE%E5%BA%A6%E5%80%BC.png?raw=true)
 上面的精度范围并不是绝对正确的，在不同的平台和GPU上，可能会有所不同。
 
 尽可能使用精度较低的类型，因为这可以优化Shader的性能，这一点在移动平台上尤其重要。从它们大体的值域范围来看，我们可以使用fixed类型来存储颜色和单位矢量，如果要存储更大范围的数据可以选择half 类型，最差情况下再选择使用float。
