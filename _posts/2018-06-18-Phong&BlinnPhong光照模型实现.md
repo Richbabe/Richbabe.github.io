@@ -21,9 +21,9 @@ tags:
 
 # Phong光照明模型
 Phong光照模型中主要的部分就是对高光（镜面反射）的计算，首先看看这张图片：
-![image](https://img-blog.csdn.net/20161205233637172?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+![image](https://github.com/Richbabe/Richbabe.github.io/blob/master/img/U3d%20Shader/Phong%E7%A4%BA%E6%84%8F%E5%9B%BE.png?raw=true)
 理想情况下，光源射出的光线，通过镜面反射，正好在反射光方向观察，观察者可以接受到的反射光最多，那么观察者与反射方向之间的夹角就决定了能够观察到高光的多少。夹角越大，高光越小，夹角越小，高光越大。而另一个影响高光大小的因素是表面的光滑程度，表面越光滑，高光越强，表面月粗糙，高光越弱。L代表光源方向，N代表顶点法线方向，V代表观察者方向，R代表反射光方向。首先需要计算反射光的方向R，反射光方向R可以通过入射光方向和法向量求出，R + L = 2dot(N,L)N，进而推出R = 2dot(N,L)N - L。关于R计算的推导，可以看下面这张图：
-![image](https://img-blog.csdn.net/20161206224712092?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcHVwcGV0X21hc3Rlcg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+![image](https://github.com/Richbabe/Richbabe.github.io/blob/master/img/U3d%20Shader/%E8%AE%A1%E7%AE%97%E5%8F%8D%E5%B0%84%E5%90%91%E9%87%8F.png?raw=true)
 不过在cg中，我们不用这么麻烦（其实OpengGL也有提供），cg为我们提供了一个计算反射光方向的函数reflect函数，我们只需要传入入射光方向（光源方向的反方向）和表面法线方向，就可以计算得出反射光的方向。然后，我们通过dot（R,V）就可以得到反射光方向和观察者方向之间的夹角余弦值了。下面给出冯氏反射模型公式：
 > I(specular) = I * k * pow(max(0,dot(R,V)), gloss)
 
@@ -152,7 +152,7 @@ Shader "Custom/Phong" {
 Phong光照模型能够很好地表现高光效果，不过Phong光照的缺点就是计算量较大，所以，在1977年，Jim Blinn对Phong光照进行了改进，称之为Blinn-Phong光照模型。
 
 关于Blinn-Phong和Phong光照模型的对比，可以参照这张图片：
-![image](https://img-blog.csdn.net/20161206010721750?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+![image](https://github.com/Richbabe/Richbabe.github.io/blob/master/img/U3d%20Shader/BlinnPhong%E7%A4%BA%E6%84%8F%E5%9B%BE.png?raw=true)
 Blinn-Phong光照引入了一个概念，半角向量，用H表示。半角向量计算简单，通过将光源方向L和视线方向V相加后归一化即可得到半角向量。Phong光照是比较反射方向R和视线方向V之间的夹角，而Blinn-Phong改为比较半角向量H和法线方向N之间的夹角。半角向量的计算复杂程度要比计算反射光线简单得多，所以Blinn-Phong的性能要高得多，效果比Phong光照相差不多，所以OpenGL中固定管线的光照模型就是Blinn-Phong光照模型。
 
 BlinnPhong光照模型如下：
@@ -432,7 +432,7 @@ Shader "Custom/BlinnPhongWithTex" {
 
 # 优化BlinnShader
 一般情况下，fragment shader是性能的瓶颈，所以优化Shader的重要思路之一就是减少逐像素计算，将计算挪到vertex shader部分，然后通过vertex shader向fragment shader中传递参数。正常情况下，一个物体在屏幕上，逐顶点计算的量级要远远小于物体在屏幕上逐像素计算的量（当然如果物体离相机特别远，光栅化之后在屏幕上只占了很小的一部分时，有可能有反过来的情况，但是有LOD之类的技术的话，远了之后，更换为低模，也会降低顶点数，所以还是逐像素计算的比较可怕，尤其是分辨率大了之后）。当然，我们也不能把所有计算都放在vertex shader中，上一篇文章中说过，如果将高光计算放在vertex shader中，效果很差，下面就来看一下，效果有多差：
-![image](https://img-blog.csdn.net/20161206233523394?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcHVwcGV0X21hc3Rlcg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+![image](https://github.com/Richbabe/Richbabe.github.io/blob/master/img/U3d%20Shader/%E9%AB%98%E5%85%89%E5%9C%A8%E9%A1%B6%E7%82%B9%E8%AE%A1%E7%AE%97%E6%95%88%E6%9E%9C%E5%B7%AE.png?raw=true)
 为什么会有这样的结果呢，主要是顶点计算的结果是通过顶点传递好的颜色进行高洛德着色，只是一个颜色的插值。而放在像素着色阶段，是通过顶点传递过来的参数，并且传递到像素阶段时经过了插值计算得到的信息，逐像素计算光照效果得到最终结果。更加详细的解释可以参照上一篇文章。2001年左右第三代modern GPU开始支持vertex shader，而在2003年左右，NVIDIA的GeForce FX和ATI Radeon 9700开始，GPU才开始支持fragment shader，也就是说fragment更先进，可以得到更好的效果。所以，我们只是将一些不会影响效果的计算放在vertex shader中即可。
 
 上面的blinn-phong shader中，我们在fragment shader中计算了世界空间下的ViewDir，我们可以把这个计算移到vertex shader中进行来实现优化：
