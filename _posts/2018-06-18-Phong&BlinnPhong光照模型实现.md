@@ -570,4 +570,8 @@ Shader "Custom/BetterBlinnPhongWithTex" {
 # 结语
 经过这几天的学习，我已经初步掌握unity shader并实现了一些基础的光照明模型，希望我以后能坚持下去，实现更多高阶、炫酷的渲染，要时刻记住自己是要成为一个优秀的游戏开发者呀~
 
-本博客的代码和资源均可在[我的github](https://github.com/Richbabe/Phong-BlinnPhong_Unity)上下载，别忘了点颗Star哟！
+本博客的代码和资源均可在我的github上下载:
+* [Unity版本](https://github.com/Richbabe/Phong-BlinnPhong_Unity)
+* [OpenGL版本](https://github.com/Richbabe/Phong_OpenGL)
+
+别忘了点颗Star哟！
