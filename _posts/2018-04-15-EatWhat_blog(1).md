@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      EatWhat：微信小程序开发一
-subtitle:   一个可以扫码点餐的小程序
+title:      微信小程序开发入门
+subtitle:   
 date:       2018-04-15
 author:     Richbabe
 header-img: img/post-bg-ios9-web.jpg
