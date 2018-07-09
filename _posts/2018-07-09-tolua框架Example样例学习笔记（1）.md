@@ -7,7 +7,7 @@ author:     Richbabe
 header-img: img/u3d技术博客背景.jpg
 catalog: true
 tags:
-    - lua
+    - Lua
     - tolua
     - Unity
 ---
