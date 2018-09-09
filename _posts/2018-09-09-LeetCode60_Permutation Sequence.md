@@ -2,7 +2,7 @@
 layout:     post
 title:      LeetCode60_Permutation Sequence
 subtitle:   
-date:       2018-08-06
+date:       2018-09-09
 author:     Richbabe
 header-img: img/post-bg-universe.jpg
 catalog: true
