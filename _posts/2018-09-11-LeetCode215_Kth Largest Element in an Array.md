@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      2018-09-11-LeetCode215_Kth Largest Element in an Array
+title:      LeetCode215_Kth Largest Element in an Array
 subtitle:   
 date:       2018-09-11
 author:     Richbabe
