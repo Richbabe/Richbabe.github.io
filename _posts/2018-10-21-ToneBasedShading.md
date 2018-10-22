@@ -251,7 +251,7 @@ fixed3 diffuse = _LightColor0.rgb * (diff * k_warm + (1 - diff) * k_cool);
 并换了个自身颜色，得到的运行效果为：
 ![image](https://github.com/Richbabe/NPR_Lab/blob/master/Image/%E7%AC%AC%E4%B8%80%E5%91%A8%E5%91%A8%E6%8A%A5/%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C%E6%88%AA%E5%9B%BE/jg6.png?raw=true)
 
-看着好像效果好了一点。
+看着好像效果好了一点~
 
 # Reference
 * Amy Gooch, Bruce Gooch, Peter Shirley, Elaine Cohen. A non-photorealistic lighting model for automatic technical illustration
