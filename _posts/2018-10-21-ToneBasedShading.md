@@ -25,6 +25,7 @@ tags:
 
 ## Introduction
 在该论文中，我们采用一种基于冷色调到暖色调的变化（类似Figure 1中的画作）的算法，同时加上黑色轮廓线和高光点来实现模拟插画风格的渲染。
+
 ![image](https://github.com/Richbabe/NPR_Lab/blob/master/Image/%E7%AC%AC%E4%B8%80%E5%91%A8%E5%91%A8%E6%8A%A5/%E8%AE%BA%E6%96%87%E6%88%AA%E5%9B%BE/lw1.png?raw=true)
 
 ## Related Work
@@ -54,7 +55,7 @@ Tuffe[23]在他的书里指出一个简单的低动态范围着色模型（low d
 ## Traditional Shading of Matte Objects
 要渲染一个卡通风格的物体，我们除了要加上轮廓和高光点外，最重要的是要渲染这个物体的表面。传统的漫反射着色令漫反射强度与光线方向和表面法线之间的夹角的余弦值成正比：
 
-$I = k_dk_a + k_dmax(0,\vec{l} \cdot \vec{n})$ （公式1）
+$$I = k_dk_a + k_dmax(0,\vec{l} \cdot \vec{n})$$ （公式1）
 
 其中I是物体表面片段的颜色的RGB值，Kd是漫反射系数，ka是环境光的RGB值，**l**是光线方向的单位向量，**n**是顶点法线的单位向量。
 
@@ -85,7 +86,7 @@ $I = k_dk_a + k_dmax(0,\vec{l} \cdot \vec{n})$ （公式1）
 
 我们可以使用公式（1）中的变量**l**·**n**作为参数来混合暖色和冷色得到最终颜色值：
 
-$I = \frac{1 + \vec{l} \cdot \vec{n}}{2}k_{cool} +(1 - \frac{1 + \vec{l} \cdot \vec{n}}{2})k_{warm}$(公式2)
+$$I = \frac{1 + \vec{l} \cdot \vec{n}}{2}k_{cool} +(1 - \frac{1 + \vec{l} \cdot \vec{n}}{2})k_{warm}$$(公式2)
 
 注意到**l**·**n**的范围是[-1,1]，因为光照方向一般在上方，所以我们假定光线方向**l**垂直于实现方向。
 
