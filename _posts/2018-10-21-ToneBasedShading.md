@@ -4,7 +4,7 @@ title:      ToneBasedShading
 subtitle:   基于色调的光照模型
 date:       2018-10-21
 author:     Richbabe
-header-img: img/okami.jpg
+header-img: img/okami.png
 catalog: true
 tags:
     - NPR实验室
