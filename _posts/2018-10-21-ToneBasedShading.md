@@ -55,7 +55,7 @@ Tuffe[23]在他的书里指出一个简单的低动态范围着色模型（low d
 ## Traditional Shading of Matte Objects
 要渲染一个卡通风格的物体，我们除了要加上轮廓和高光点外，最重要的是要渲染这个物体的表面。传统的漫反射着色令漫反射强度与光线方向和表面法线之间的夹角的余弦值成正比：
 
-$$I = k_dk_a + k_dmax(0,\vec{l} \cdot \vec{n})$$ （公式1）
+![image](https://github.com/Richbabe/NPR_Lab/blob/master/Image/%E7%AC%AC%E4%B8%80%E5%91%A8%E5%91%A8%E6%8A%A5/%E8%AE%BA%E6%96%87%E6%88%AA%E5%9B%BE/%E5%85%AC%E5%BC%8F1.png?raw=true)
 
 其中I是物体表面片段的颜色的RGB值，Kd是漫反射系数，ka是环境光的RGB值，**l**是光线方向的单位向量，**n**是顶点法线的单位向量。
 
@@ -86,7 +86,7 @@ $$I = k_dk_a + k_dmax(0,\vec{l} \cdot \vec{n})$$ （公式1）
 
 我们可以使用公式（1）中的变量**l**·**n**作为参数来混合暖色和冷色得到最终颜色值：
 
-$$I = \frac{1 + \vec{l} \cdot \vec{n}}{2}k_{cool} +(1 - \frac{1 + \vec{l} \cdot \vec{n}}{2})k_{warm}$$(公式2)
+![image](https://github.com/Richbabe/NPR_Lab/blob/master/Image/%E7%AC%AC%E4%B8%80%E5%91%A8%E5%91%A8%E6%8A%A5/%E8%AE%BA%E6%96%87%E6%88%AA%E5%9B%BE/%E5%85%AC%E5%BC%8F2.png)
 
 注意到**l**·**n**的范围是[-1,1]，因为光照方向一般在上方，所以我们假定光线方向**l**垂直于实现方向。
 
@@ -103,9 +103,7 @@ Figure6中的图片通过极小的亮度变化和明显的色彩变化传递了�
 ```
 这两种颜色是和物体自身漫反射系数kd无关的，与kd相关的是黑色到物体颜色的自身变化，因此我们将这两种颜色变化组合起来得到Kcool和Kwarm：
 
-$$k_{cool} = k_{blue} + \alpha k_d$$
-$$k_{warm} = k_{yellow} + \beta k_d$$
-公式(3)
+![image](https://github.com/Richbabe/NPR_Lab/blob/master/Image/%E7%AC%AC%E4%B8%80%E5%91%A8%E5%91%A8%E6%8A%A5/%E8%AE%BA%E6%96%87%E6%88%AA%E5%9B%BE/%E5%85%AC%E5%BC%8F3.png?raw=true)
 
 将公式（3）带入公式（2）可得到我们最终的基于色调的光照模型有4个自由变量b、y、α和β。其中b和y将决定色温的变化强度；α和β将决定物体颜色和亮度的变化强度。
 
