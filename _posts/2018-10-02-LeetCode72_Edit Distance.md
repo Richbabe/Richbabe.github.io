@@ -44,11 +44,11 @@ public:
         int m = word1.size();
         int n = word2.size();
         int dp[m + 1][n + 1];//dp[i][j]表示word1的前i个字符转换成word2前j个字符的编辑路径
-        //初始化dp矩阵第一行(即删除操作)
+        //初始化dp矩阵第一行(即添加操作)
         for(int i = 0;i <= n;i++){
             dp[0][i] = i;
         }
-        //初始化dp矩阵的第一列（即添加操作）
+        //初始化dp矩阵的第一列（即删除操作）
         for(int i = 0;i <= m;i++){
             dp[i][0] = i;
         }
@@ -85,10 +85,10 @@ class Solution(object):
         n = len(word2)
         #dp[i][j]表示word1的前i个字符转换成word2前j个字符的编辑路径
         dp = [([0] * (n + 1)) for i in range(m + 1)]
-        #初始化dp矩阵第一行(即删除操作)
+        #初始化dp矩阵第一行(即添加操作)
         for i in range(n + 1):
             dp[0][i] = i
-        #初始化dp矩阵第一列（即添加操作）
+        #初始化dp矩阵第一列（即删除操作）
         for i in range(m + 1):
             dp[i][0] = i
         #计算dp矩阵
