@@ -1,6 +1,6 @@
 ---
 layout:     post
-title:      LeetCode78_Subsets
+title:      LeetCode79_Word Search
 subtitle:   
 date:       2018-11-01
 author:     Richbabe
