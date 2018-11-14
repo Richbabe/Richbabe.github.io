@@ -4,7 +4,7 @@ title:      The summary of silhouette drawing
 subtitle:   轮廓线渲染方法总结
 date:       2018-11-14
 author:     Richbabe
-header-img: img/okami.jpg
+header-img: img/okami.png
 catalog: true
 tags:
     - NPR实验室
