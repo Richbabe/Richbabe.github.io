@@ -27,7 +27,7 @@ public:
         int row = matrix.size();
         int col = matrix[0].size();
         queue<pair<int,int> > q;//遍历点队列
-        vector<vector<int> > dirs = {{0,-1},{-1,0},{1,0},{0,1}};//保存四个方向
+        vector<vector<int> > dirs = { {0,-1},{-1,0},{1,0},{0,1} };//保存四个方向
         for(int i = 0;i < row;i++){
             for(int j = 0;j < col;j++){
                 if(matrix[i][j] == 0){
